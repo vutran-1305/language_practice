@@ -17,24 +17,33 @@ class VocabTest(models.Model):
     count_test_daily = fields.Integer()
 
     def action_start_test(self):
-        daily_ids = self.env['vocab.test.daily'].sudo().search([('vocab_test_id', '=', self.id), ('date', '=', date.today()), ('create_uid', '=', self.create_uid.id)])
-        if not daily_ids:
-            if not self.domain:
-                vocab_import = self.env['vocab.import'].sudo().search([])
-            else:
-                record_domain = literal_eval(self.domain or "[]")
-                vocab_import = self.env['vocab.import'].sudo().search(record_domain)
-            if vocab_import:
+        record_domain = []
+        if self.domain:
+            record_domain = literal_eval(self.domain or "[]")
+        record_domain.append(('create_uid', '=', self.create_uid.id))
+        vocab_import = self.env['vocab.import'].sudo().search(record_domain)
+        if vocab_import:
+            if not self.vocab_test_daily_ids:
                 values = []
                 for vocab in vocab_import:
                     values.append({'vocab_import_id': vocab.id, 'date': date.today(), 'vocab_test_id': self.id})
                 daily_ids = self.env['vocab.test.daily'].sudo().create(values)
+            else:
+                vocab_import_ids = self.vocab_test_daily_ids.mapped("vocab_import_id")
+                if vocab_import_ids:
+                    values = []
+                    for vocab in vocab_import:
+                        if vocab not in vocab_import_ids:
+                            values.append({'vocab_import_id': vocab.id, 'date': date.today(), 'vocab_test_id': self.id})
+                    if values:
+                        self.env['vocab.test.daily'].sudo().create(values)
+
         action = {
             'name': 'Test Daily - %s' % date.today().strftime("%d%m%Y"),
             'type': 'ir.actions.act_window',
             'res_model': 'vocab.test.daily',
             'view_mode': 'tree',
-            'domain': [('id', 'in', daily_ids.ids)],
+            'domain': [('id', 'in', self.vocab_test_daily_ids.ids)],
             'context': {'create': False, 'delete': False},
             'target': 'current',
         }
