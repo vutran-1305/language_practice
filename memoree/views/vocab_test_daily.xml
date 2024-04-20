@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="vocab_test_daily_tree" model="ir.ui.view">
+        <field name="name">vocab.test.daily.tree</field>
+        <field name="model">vocab.test.daily</field>
+        <field name="arch" type="xml">
+            <tree limit="1000" string="types" editable="bottom" decoration-danger="status == 'failed'" decoration-success="status == 'passed'">
+                <field name="date" column_invisible="1"/>
+                <field name="is_hard" column_invisible="1"/>
+                <field name="name" readonly="1"/>
+                <field name="value_input" force_save="1" readonly="status == 'passed'"/>
+                <field name="status" force_save="1" readonly="1" widget="badge" decoration-danger="status == 'failed'" decoration-success="status == 'passed'"/>
+                <button name="action_hint" type="object" string="Hint" class="oe_highlight" invisible="status == 'passed'"/>
+                <button name="action_check" type="object" string="Check" class="oe_highlight" invisible="status == 'passed'"/>
+                <button name="action_mark_hard" type="object" string="Mark Hard" class="oe_highlight" invisible="is_hard == True"/>
+                <button name="action_unmark_hard" type="object" string="Unmark Hard" class="oe_highlight" invisible="is_hard == False"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="vocab_test_daily_form" model="ir.ui.view">
+        <field name="name">vocab.test.daily.form</field>
+        <field name="model">vocab.test.daily</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="date" readonly="1"/>
+                        <field name="name" readonly="1"/>
+                        <field name="value_input" force_save="1" readonly="status == 'passed'"/>
+                        <field name="status" force_save="1" readonly="1"/>
+                        <button name="action_hint" type="object" string="Hint" class="oe_highlight" invisible="status == 'passed'"/>
+                        <button name="action_check" type="object" string="Check" class="oe_highlight" invisible="status == 'passed'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="vocab_test_daily_action" model="ir.actions.act_window">
+        <field name="name">Vocab Test Daily</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vocab.test.daily</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_reset_test_daily" model="ir.actions.server">
+            <field name="name">### Reset Test</field>
+            <field name="model_id" ref="memoree.model_vocab_test_daily"/>
+            <field name="binding_model_id" ref="memoree.model_vocab_test_daily"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records.action_reset()
+            </field>
+    </record>
+
+    <menuitem name="Vocab Test Daily" id="memoree.menu_vocab_test_daily" action="vocab_test_daily_action" parent="memoree.menu_memoree_test" sequence="2"/>
+
+</odoo>

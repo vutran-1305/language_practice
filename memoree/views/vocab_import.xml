@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="vocab_import_tree" model="ir.ui.view">
+        <field name="name">vocab.import.tree</field>
+        <field name="model">vocab.import</field>
+        <field name="arch" type="xml">
+            <tree string="types">
+                <field name="name"/>
+                <field name="value"/>
+                <field name="topic_id"/>
+                <field name="is_hard"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="vocab_import_form" model="ir.ui.view">
+        <field name="name">vocab.import.form</field>
+        <field name="model">vocab.import</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="value"/>
+                        <field name="topic_id"/>
+                        <field name="is_hard"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="vocab_import_action" model="ir.actions.act_window">
+        <field name="name">Vocab Import</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vocab.import</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Vocab Import" id="memoree.menu_vocab_import" action="vocab_import_action" parent="memoree.menu_memoree_config" sequence="1"/>
+
+</odoo>

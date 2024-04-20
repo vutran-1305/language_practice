@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vocab_import,memoree.vocab_import,model_vocab_import,base.group_user,1,1,1,1
+access_vocab_test,memoree.vocab_test,model_vocab_test,base.group_user,1,1,1,1
+access_vocab_test_daily,memoree.vocab_test_daily,model_vocab_test_daily,base.group_user,1,1,1,1
+access_vocab_topic,memoree.vocab_topic,model_vocab_topic,base.group_user,1,1,1,1

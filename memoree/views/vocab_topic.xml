@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="vocab_topic_tree" model="ir.ui.view">
+        <field name="name">vocab.topic.tree</field>
+        <field name="model">vocab.topic</field>
+        <field name="arch" type="xml">
+            <tree string="types">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="vocab_topic_form" model="ir.ui.view">
+        <field name="name">vocab.topic.form</field>
+        <field name="model">vocab.topic</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="vocab_topic_action" model="ir.actions.act_window">
+        <field name="name">Vocab Topic</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vocab.topic</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Vocab Topic" id="memoree.menu_vocab_topic" action="vocab_topic_action" parent="memoree.menu_memoree_config" sequence="1"/>
+
+</odoo>
