@@ -5,7 +5,7 @@ class VocabTestDaily(models.Model):
     _name = "vocab.test.daily"
 
     vocab_test_id = fields.Many2one('vocab.test')
-    vocab_import_id = fields.Many2one('vocab.import')
+    vocab_import_id = fields.Many2one('vocab.import', string="Name")
     name = fields.Char(related='vocab_import_id.name')
     value = fields.Char(related='vocab_import_id.value')
     is_hard = fields.Boolean(related='vocab_import_id.is_hard')
@@ -17,7 +17,7 @@ class VocabTestDaily(models.Model):
     def onchange_value_input(self):
         for rec in self:
             if rec.value_input:
-                if rec.value_input.strip().lower() == rec.value.strip().lower():
+                if rec.value_input.strip().lower().strip(".") == rec.value.strip().lower().strip("."):
                     rec.status = 'passed'
                 else:
                     rec.status = 'failed'
@@ -39,7 +39,7 @@ class VocabTestDaily(models.Model):
 
     def action_check(self):
         status = 'failed'
-        if self.value_input.strip().lower() == self.value.strip().lower():
+        if self.value_input.strip().lower().strip(".") == self.value.strip().lower().strip("."):
             status = 'passed'
         self.status = status
 
