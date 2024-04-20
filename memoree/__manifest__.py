@@ -23,6 +23,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'security/ir_rule.xml',
         'views/memoree_menu.xml',
         'views/vocab_import.xml',
         'views/vocab_test.xml',

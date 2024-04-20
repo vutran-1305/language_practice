@@ -9,7 +9,7 @@
                 <field name="name"/>
                 <field name="value"/>
                 <field name="topic_id"/>
-                <field name="is_hard"/>
+                <field name="is_hard" widget="boolean_toggle"/>
             </tree>
         </field>
     </record>
@@ -25,7 +25,7 @@
                         <field name="name"/>
                         <field name="value"/>
                         <field name="topic_id"/>
-                        <field name="is_hard"/>
+                        <field name="is_hard" widget="boolean_toggle"/>
                     </group>
                 </sheet>
             </form>

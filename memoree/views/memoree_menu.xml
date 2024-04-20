@@ -3,6 +3,6 @@
     <data>
         <menuitem name="Memoree" id="memoree.memoree_menu_root" sequence="6"/>
         <menuitem name="Test" id="memoree.menu_memoree_test" parent="memoree.memoree_menu_root" sequence="1"/>
-        <menuitem name="Configuration" id="memoree.menu_memoree_config" parent="memoree.memoree_menu_root" sequence="300" groups="base.group_system"/>
+        <menuitem name="Configuration" id="memoree.menu_memoree_config" parent="memoree.memoree_menu_root" sequence="300"/>
     </data>
 </odoo>

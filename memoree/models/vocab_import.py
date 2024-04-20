@@ -7,6 +7,6 @@ class VocabImport(models.Model):
 
     name = fields.Char()
     value = fields.Char()
-    topic_id = fields.Many2one('vocab.topic')
+    topic_id = fields.Many2one('vocab.topic', domain=lambda self: [('create_uid', 'in', [self.env.user.id])])
     is_hard = fields.Boolean()
 

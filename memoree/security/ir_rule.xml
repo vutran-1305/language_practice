@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+       <record id="memoree_user_can_read_my_vocab_import" model="ir.rule">
+            <field name="name">### User chỉ nhìn thấy bản ghi do mình tạo</field>
+            <field name="model_id" ref="memoree.model_vocab_import"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="active" eval="1"/>
+        </record>
+
+        <record id="memoree_user_can_read_my_vocab_test" model="ir.rule">
+            <field name="name">### User chỉ nhìn thấy bản ghi do mình tạo</field>
+            <field name="model_id" ref="memoree.model_vocab_test"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="active" eval="1"/>
+        </record>
+
+        <record id="memoree_user_can_read_my_vocab_test_daily" model="ir.rule">
+            <field name="name">### User chỉ nhìn thấy bản ghi do mình tạo</field>
+            <field name="model_id" ref="memoree.model_vocab_test_daily"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="active" eval="1"/>
+        </record>
+
+        <record id="memoree_user_can_read_my_vocab_topic" model="ir.rule">
+            <field name="name">### User chỉ nhìn thấy bản ghi do mình tạo</field>
+            <field name="model_id" ref="memoree.model_vocab_topic"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="active" eval="1"/>
+        </record>
+
+    </data>
+</odoo>

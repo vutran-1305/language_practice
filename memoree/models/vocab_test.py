@@ -13,11 +13,11 @@ class VocabTest(models.Model):
     end_time = fields.Date()
     is_limit = fields.Boolean()
     count_word = fields.Integer()
-    vocab_test_daily_ids = fields.One2many('vocab.test.daily', 'vocab_test_id')
+    vocab_test_daily_ids = fields.One2many('vocab.test.daily', 'vocab_test_id', domain=lambda self: [('create_uid', 'in', [self.env.user.id])])
     count_test_daily = fields.Integer()
 
     def action_start_test(self):
-        daily_ids = self.env['vocab.test.daily'].sudo().search([('vocab_test_id', '=', self.id), ('date', '=', date.today())])
+        daily_ids = self.env['vocab.test.daily'].sudo().search([('vocab_test_id', '=', self.id), ('date', '=', date.today()), ('create_uid', '=', self.create_uid.id)])
         if not daily_ids:
             if not self.domain:
                 vocab_import = self.env['vocab.import'].sudo().search([])

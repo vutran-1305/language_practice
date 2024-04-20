@@ -61,7 +61,7 @@
                 <field name="name"/>
                 <field name="start_time"/>
                 <field name="end_time"/>
-                <field name="is_limit"/>
+                <field name="is_limit" widget="boolean_toggle"/>
             </tree>
         </field>
     </record>
@@ -87,7 +87,7 @@
                         <field name="domain" widget="domain" options="{'foldable': True, 'model': 'model_name'}"/>
                         <field name="start_time" required="1"/>
                         <field name="end_time" required="1"/>
-                        <field name="is_limit"/>
+                        <field name="is_limit" widget="boolean_toggle"/>
                         <field name="count_word" invisible="is_limit == False" required="is_limit == True"/>
                     </group>
                 </sheet>
