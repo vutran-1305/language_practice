@@ -7,9 +7,12 @@
         <field name="arch" type="xml">
             <tree limit="1000" string="types" editable="bottom" decoration-danger="status == 'failed'" decoration-success="status == 'passed'">
                 <field name="date" column_invisible="1"/>
+                <field name="vocab_test_id" column_invisible="1"/>
+                <field name="check_type" column_invisible="1"/>
                 <field name="is_hard" column_invisible="1"/>
                 <field name="vocab_import_id" readonly="1"/>
                 <field name="value_input" force_save="1" readonly="status == 'passed'"/>
+                <field name="simular_ratio" force_save="1"  readonly="1" widget="progressbar" column_invisible="context.get('is_hidden_simular_ratio')"/>
                 <field name="status" force_save="1" readonly="1" widget="badge" decoration-danger="status == 'failed'" decoration-success="status == 'passed'"/>
                 <button name="action_hint" type="object" string="Hint" class="oe_highlight" invisible="status == 'passed'"/>
                 <button name="action_check" type="object" string="Check" class="oe_highlight" invisible="status == 'passed'"/>
@@ -30,6 +33,7 @@
                         <field name="date" readonly="1"/>
                         <field name="vocab_import_id" readonly="1"/>
                         <field name="value_input" force_save="1" readonly="status == 'passed'"/>
+                        <field name="simular_ratio" force_save="1"  widget="progressbar" column_invisible="context.get('is_hidden_simular_ratio')" readonly="1"/>
                         <field name="status" force_save="1" readonly="1"/>
                         <button name="action_hint" type="object" string="Hint" class="oe_highlight" invisible="status == 'passed'"/>
                         <button name="action_check" type="object" string="Check" class="oe_highlight" invisible="status == 'passed'"/>

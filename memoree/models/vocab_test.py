@@ -6,7 +6,7 @@ class VocabTest(models.Model):
     _name = "vocab.test"
     _description = "Vocab Test"
 
-    name = fields.Char()
+    name = fields.Char(required=1)
     model_name = fields.Char(string='Model Name', default='vocab.import', store=True)
     domain = fields.Char(string="Filter",  readonly=False, store=True)
     start_time = fields.Date()
@@ -15,6 +15,8 @@ class VocabTest(models.Model):
     count_word = fields.Integer()
     vocab_test_daily_ids = fields.One2many('vocab.test.daily', 'vocab_test_id', domain=lambda self: [('create_uid', 'in', [self.env.user.id])])
     count_test_daily = fields.Integer()
+    check_type = fields.Selection([('totally_same', 'Totally same'), ('have_similarity', 'Have Similarity')], default='totally_same', required=1)
+    maximum_similarity_ratio = fields.Float(default=80)
 
     def action_start_test(self):
         record_domain = []
@@ -44,9 +46,11 @@ class VocabTest(models.Model):
             'res_model': 'vocab.test.daily',
             'view_mode': 'tree',
             'domain': [('id', 'in', self.vocab_test_daily_ids.ids)],
-            'context': {'create': False, 'delete': False},
+            'context': {'create': False, 'delete': False, 'is_hidden_simular_ratio': False},
             'target': 'current',
         }
+        if self.check_type != 'have_similarity':
+            action['context']['is_hidden_simular_ratio'] = True
         return action
 
     def action_open_test_daily(self):

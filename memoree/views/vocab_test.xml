@@ -59,6 +59,7 @@
         <field name="arch" type="xml">
             <tree string="types">
                 <field name="name"/>
+                <field name="check_type"/>
                 <field name="start_time"/>
                 <field name="end_time"/>
                 <field name="is_limit" widget="boolean_toggle"/>
@@ -83,10 +84,12 @@
                     </div>
                     <group>
                         <field name="name" required="1"/>
+                        <field name="check_type" required="1" widget="radio" options="{'horizontal': True}"/>
+                        <field name="maximum_similarity_ratio" invisible="check_type != 'have_similarity'" required="check_type == 'have_similarity'"/>
                         <field name="model_name" invisible="1"/>
                         <field name="domain" widget="domain" options="{'foldable': True, 'model': 'model_name'}"/>
-                        <field name="start_time" required="1"/>
-                        <field name="end_time" required="1"/>
+                        <field name="start_time"/>
+                        <field name="end_time"/>
                         <field name="is_limit" widget="boolean_toggle"/>
                         <field name="count_word" invisible="is_limit == False" required="is_limit == True"/>
                     </group>
